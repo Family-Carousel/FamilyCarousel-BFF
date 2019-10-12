@@ -1,0 +1,79 @@
+service: familycarousel-bff
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: us-east-2
+  profile: ${opt:profile, ''}
+  memorySize: 1280
+  logRetentionInDays: 2
+  stage: ${opt:stage, 'dev'}
+  apiKeys: 
+    - FamilyCarousel-BFF-${self:provider.stage}
+  usagePlan:
+    quota:
+      limit: 1000
+      period: DAY
+    throttle:
+      burstLimit: 1000
+      rateLimit: 1000
+  environment:
+    NODE_ENV: ${self:provider.stage}
+    AWS_PROFILE: ${self:provider.profile}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "logs:*"
+      Resource: "*"
+
+custom:
+  webpack:
+    webpackConfig: webpack.config.js
+    includeModules: false
+    packager: 'yarn'
+  serverless-offline:
+    host: 0.0.0.0
+  FamilyCarouselDomainMap:
+    dev: bff.familycarousel.com
+    prod: bff.familycarousel.com
+  FamilyCarouselCertMap:
+    dev: '*.familycarousel.com'
+    prod: '*.familycarousel.com'
+  customDomain:
+    domainName: ${self:custom.FamilyCarouselDomainMap.${self:provider.stage}}
+    certificateName: ${self:custom.FamilyCarouselCertMap.${self:provider.stage}}
+    createRoute53Record: true
+    endpointType: 'regional'
+
+package: 
+  individiually: true
+  excludeDevDependencies: true
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+  - serverless-domain-manager
+  - serverless-plugin-optimize
+
+functions:
+  graphql:
+    name: FamilyCarousel-bff-${self:provider.stage}
+    handler: handlers/handler.graphql
+    description: Lambda for family carousel graphql service
+    optimize: false
+    events:
+    - http:
+        path: /graphql
+        method: post
+        cors: true
+        private: true
+    - http:
+        path: /graphql
+        method: get
+        cors: true
+        private: true
+
+  
+
+
+

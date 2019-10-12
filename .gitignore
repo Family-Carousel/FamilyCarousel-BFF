@@ -59,3 +59,20 @@ typings/
 
 # next.js build output
 .next
+
+# Serverless directories
+.serverless
+
+# Mac OS Store files
+.DS_Store
+
+# Copied From TM Service
+.scannerwork
+.serverless
+.test-results
+.coverage
+yarn-error.log
+client/out
+debug.log
+.webpack
+doc/*
