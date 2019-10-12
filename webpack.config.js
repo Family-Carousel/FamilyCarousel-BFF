@@ -2,7 +2,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const slsw = require('serverless-webpack');
 
-modules.exports = {
+module.exports = {
     entry: slsw.lib.entries,
     target: 'node',
     mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
@@ -20,7 +20,7 @@ modules.exports = {
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: [['@babel/env', { targets: { node: '10.x' } }]],
+                            presets: [['@babel/env', { targets: { node: '8.10' } }]],
                             plugins: [
                                 '@babel/plugin-proposal-object-rest-spread'
                             ]

@@ -2,11 +2,11 @@ service: familycarousel-bff
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs8.10
   region: us-east-2
-  profile: ${opt:profile, ''}
+  profile: ${opt:profile, 'default'}
   memorySize: 1280
-  logRetentionInDays: 2
+  logRetentionInDays: 3
   stage: ${opt:stage, 'dev'}
   apiKeys: 
     - FamilyCarousel-BFF-${self:provider.stage}
@@ -72,8 +72,3 @@ functions:
         method: get
         cors: true
         private: true
-
-  
-
-
-

@@ -8,7 +8,7 @@
     "test:coverage": "yarn jest --coverage",
     "start": "yarn serverless offline --noTimeout",
     "debug": "export SLS_DEBUG=* && node --inspect ./node_modules/.bin/serverless offline",
-    "deploy:dev": "yarn serverless deploy -s dev"
+    "deploy:dev": "serverless deploy -s dev"
   },
   "repository": {
     "type": "git",
