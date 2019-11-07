@@ -4,10 +4,15 @@ const typeDefs = gql`
 
     "Family Template"
     type FamilyTemplate {
-        FamilyId: ID!,
-        FamilyName: String,
-        FamilyDescription: String,
-        FamilyStatus: String
+        Id: ID!
+        MemberId: String
+        Name: String
+        Description: String
+        IsActive: String
+        CreatedBy: String
+        CreatedDateTime: String
+        LastUpdateBy: String
+        LastUpdateDateTime: String
     }
 
     type Query {
@@ -17,8 +22,8 @@ const typeDefs = gql`
     }
 
     input FamilyInput{
-        FamilyId: String,
-        FamilyName: String,
+        FamilyId: String
+        FamilyName: String
         FamilyDescription: String
     }
 
