@@ -13,13 +13,48 @@ module.exports = class familyAPI extends RESTDataSource {
         request.headers.set('x-api-key', apiKey);
     }
 
-    // EXAMPLE
-    // async get(templateId) {
-    //     try {
-    //         return await this.post('family', { data });
-    //     } catch (err) {
-    //         console.error(' :', err);
-    //         throw('');
-    //     }
-    // }
+    async getAllFamiliesForMemberId(memberId) {
+        try {
+            return await this.get('family/' + {memberId: memberId});
+        } catch (err) {
+            console.error('BFF - Failed to get list of family :', err);
+            throw('BFF - Failed to get list of family');
+        }
+    }
+    
+    async getFamily(familyId) {
+        try {
+            return await this.get('family/' + familyId);
+        } catch (err) {
+            console.error('BFF - Failed to get family :', err);
+            throw('BFF - Failed to get family');
+        }
+    }
+
+    async createFamily(familyData) {
+        try {
+            return await this.post('family', { data: familyData });
+        } catch (err) {
+            console.error('BFF - Failed to create family :', err);
+            throw('BFF - Failed to create family');
+        }
+    }
+
+    async updateFamily(familyData) {
+        try {
+            return await this.put('family', { data: familyData });
+        } catch (err) {
+            console.error('BFF - Failed to update family :', err);
+            throw('BFF - Failed to update family');
+        }
+    }
+
+    async deleteFamily(familyId) {
+        try {
+            return await this.delete('family/' + familyId);
+        } catch (err) {
+            console.error('BFF - Failed to delete family :', err);
+            throw('BFF - Failed to delete family');
+        }
+    }
 }

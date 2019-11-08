@@ -1,29 +1,21 @@
-
-class Family {
-    constructor(FamilyId, {FamilyName, FamilyStatus, FamilyDescription}) {
-        this.FamilyId = FamilyId;
-        this.FamilyName = FamilyName;
-        this.FamilyStatus = FamilyStatus;
-        this.FamilyDescription = FamilyDescription
-    }
-}
-
 module.exports = {
     Query: {
-        getFamilyByFamilyId: async (_, { FamilyId }) => {
-            let family = {
-                "FamilyName": "Cavanaugh Family",
-                "FamilyStatus": "Active",
-                "FamilyDescription": "This is a fake description"
-            };
-
-            return new Family(FamilyId, family);
-        }
+        getFamilyByFamilyId: async (_, { id }, { dataSources }) => {
+            return await dataSources.familyAPI.getFamily(id);
+        },
+        listFamiliesbyMemberId: async (_, { memberId }, { dataSources }) => {
+            return await dataSources.familyAPI.getAllFamiliesForMemberId(memberId);
+        }         
     },
     Mutation: {
         createFamily: async (_, { input }) => {
-            let id = "1111";
-            return new Family(id, input);
+            return await dataSources.familyAPI.createFamily(input);
+        },
+        updateFamily: async (_, { input }, { dataSources }) => {
+            return await dataSources.familyAPI.updateFamily(input);
+        },
+        deleteFamily: async (_, { id }, { dataSources }) => {
+            return await dataSources.familyAPI.deleteFamily(id);
         }
     }
 };

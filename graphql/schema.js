@@ -19,6 +19,7 @@ const typeDefs = gql`
         getFamilyByFamilyId(
             "Custom String"
             FamilyId: String!): [FamilyTemplate]  
+        
     }
 
     input FamilyInput{
