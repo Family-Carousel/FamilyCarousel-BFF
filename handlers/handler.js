@@ -18,7 +18,7 @@ let apolloSettings = {
   resolvers: resolvers,
   dataSources: () => {
     return {
-      familyAPI: new familyAPI()
+      familyApi: new familyApi()
     }
   },
   validationRules: [depthLimit(6)],
