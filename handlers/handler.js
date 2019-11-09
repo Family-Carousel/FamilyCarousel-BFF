@@ -4,9 +4,9 @@ const { ApolloServer } = require('apollo-server-lambda');
 const depthLimit = require('graphql-depth-limit');
 const { typeDefs } = require('../graphql/schema');
 const resolvers = require('../graphql/resolvers');
-const familyApi = require('../dataSources/family/familyAPI');
+const familyAPI = require('../dataSources/family/familyAPI');
 
-let contextMethod = ({event, context}) => ({
+let contextMethod = ({ event, context }) => ({
   headers: event.headers,
   functionName: context.functionName,
   event,
@@ -18,20 +18,20 @@ let apolloSettings = {
   resolvers: resolvers,
   dataSources: () => {
     return {
-      familyApi: new familyApi()
+      familyAPI: new familyAPI()
     }
   },
   validationRules: [depthLimit(6)],
   context: contextMethod
 };
 
-const server = new ApolloServer( apolloSettings );
+const server = new ApolloServer(apolloSettings);
 
 module.exports.graphql = server.createHandler(
   {
     cors: {
       origin: '*',
-      crednetials: true
+      credentials: true
     }
   }
 );

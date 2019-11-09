@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Family-Carousel/FamilyCarousel-BFF#readme",
   "dependencies": {
+    "apollo-datasource-rest": "^0.6.6",
     "apollo-server-lambda": "^2.9.6",
     "config": "^3.2.3",
     "graphql": "^14.5.8",
