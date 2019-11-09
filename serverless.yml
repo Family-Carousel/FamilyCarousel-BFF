@@ -28,13 +28,13 @@ provider:
 
 custom:
   webpack:
-    webpackConfig: webpack.config.js
-    includeModules: false
+    webpackConfig: "webpack.config.js"
+    includeModules: true
     packager: 'yarn'
   serverless-offline:
     host: 0.0.0.0
   FamilyCarouselDomainMap:
-    dev: bff.familycarousel.com
+    dev: bff-dev.familycarousel.com
     prod: bff.familycarousel.com
   FamilyCarouselCertMap:
     dev: '*.familycarousel.com'
@@ -47,7 +47,7 @@ custom:
 
 package: 
   individiually: true
-  excludeDevDependencies: true
+  excludeDevDependencies: false
 
 plugins:
   - serverless-offline
@@ -66,9 +66,9 @@ functions:
         path: /graphql
         method: post
         cors: true
-        #private: true
+        private: true
     - http:
         path: /graphql
         method: get
         cors: true
-        #private: true
+        private: true
