@@ -5,7 +5,7 @@ const typeDefs = gql`
     "Family Template"
     type FamilyTemplate {
         Id: ID!
-        MemberId: String
+        MemberId: ID!
         Name: String
         Description: String
         IsActive: String
@@ -16,20 +16,20 @@ const typeDefs = gql`
     }
 
     type Query {
-        getFamilyByFamilyId(
-            "Custom String"
-            FamilyId: String!): [FamilyTemplate]  
-        
+        getFamilyByFamilyId("Custom String" FamilyId: ID!): FamilyTemplate  
+        listFamiliesbyMemberId("Custom String" MemberId: ID!): [FamilyTemplate]
     }
 
     input FamilyInput{
-        FamilyId: String
+        FamilyId: ID
         FamilyName: String
         FamilyDescription: String
     }
 
     type Mutation {
-        createFamily(input: FamilyInput): FamilyTemplate
+        createFamily(input: FamilyInput!): FamilyTemplate
+        updateFamily(id: ID!, input: FamilyInput): FamilyTemplate
+        deleteFamily(id: ID!): FamilyTemplate
     }
 `;
 

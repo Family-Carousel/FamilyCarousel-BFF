@@ -8,7 +8,7 @@ module.exports = {
         }         
     },
     Mutation: {
-        createFamily: async (_, { input }) => {
+        createFamily: async (_, { input }, { dataSources }) => {
             return await dataSources.familyAPI.createFamily(input);
         },
         updateFamily: async (_, { input }, { dataSources }) => {

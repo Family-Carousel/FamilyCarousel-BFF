@@ -66,9 +66,9 @@ functions:
         path: /graphql
         method: post
         cors: true
-        private: true
+        #private: true
     - http:
         path: /graphql
         method: get
         cors: true
-        private: true
+        #private: true
