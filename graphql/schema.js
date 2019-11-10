@@ -16,7 +16,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        getFamilyByFamilyId("Custom String" FamilyId: ID!): FamilyTemplate  
+        getFamilyByFamilyId("Custom String" id: ID!): FamilyTemplate  
         listFamiliesbyMemberId("Custom String" MemberId: ID!): [FamilyTemplate]
     }
 
