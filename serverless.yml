@@ -20,6 +20,7 @@ provider:
   environment:
     NODE_ENV: ${self:provider.stage}
     AWS_PROFILE: ${self:provider.profile}
+    FAMILY_SERVICE_API_KEY: ${ssm:/familycarousel/${self:provider.stage}/familyservice~true}
   iamRoleStatements:
     - Effect: "Allow"
       Action:
