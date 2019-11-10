@@ -6,12 +6,13 @@ module.exports = class familyAPI extends RESTDataSource {
 
     constructor() {
         super();
-        this.HTTPCache = new HTTPCache();
+        this.httpCache = new HTTPCache();
         this.baseURL = familyServiceUrl;
     }
 
     async willSendRequest(request) {
         request.headers.set('x-api-key', apiKey);
+        request.headers.set('Content-Type', 'application/json')
     }
 
     async getAllFamiliesForMemberId(memberId) {
