@@ -21,6 +21,7 @@ provider:
     NODE_ENV: ${self:provider.stage}
     AWS_PROFILE: ${self:provider.profile}
     FAMILY_SERVICE_API_KEY: ${ssm:/familycarousel/${self:provider.stage}/familyservice~true}
+    FAMILY_SERVICE_BASE_URL: ${self:custom.FamilyServiceUrl.${self:provider.stage}}
   iamRoleStatements:
     - Effect: "Allow"
       Action:
@@ -28,6 +29,9 @@ provider:
       Resource: "*"
 
 custom:
+  FamilyServiceUrl:
+    dev: bff-dev.familycarousel.com
+    prod: bff.familycarousel.com
   webpack:
     webpackConfig: "webpack.config.js"
     includeModules: true
