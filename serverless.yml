@@ -30,8 +30,8 @@ provider:
 
 custom:
   FamilyServiceUrl:
-    dev: bff-dev.familycarousel.com
-    prod: bff.familycarousel.com
+    dev: https://bff-dev.familycarousel.com
+    prod: https://bff.familycarousel.com
   webpack:
     webpackConfig: "webpack.config.js"
     includeModules: true
