@@ -24,9 +24,9 @@ module.exports = class familyAPI extends RESTDataSource {
         }
     }
     
-    async getFamily(id) {
+    async getFamily(familyId) {
         try {
-            return await this.get('family/' + id);
+            return await this.get('family/' + familyId);
         } catch (err) {
             console.error('BFF - Failed to get family :', err);
             throw('BFF - Failed to get family');

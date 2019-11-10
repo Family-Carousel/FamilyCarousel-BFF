@@ -1,7 +1,7 @@
 module.exports = {
     Query: {
-        getFamilyByFamilyId: async (_, { id }, { dataSources }) => {
-            return await dataSources.familyAPI.getFamily(id);
+        getFamilyByFamilyId: async (_, { familyId }, { dataSources }) => {
+            return await dataSources.familyAPI.getFamily(familyId);
         },
         listFamiliesbyMemberId: async (_, { memberId }, { dataSources }) => {
             return await dataSources.familyAPI.getAllFamiliesForMemberId(memberId);
