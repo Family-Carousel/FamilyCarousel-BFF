@@ -30,8 +30,8 @@ provider:
 
 custom:
   FamilyServiceUrl:
-    dev: https://bff-dev.familycarousel.com
-    prod: https://bff.familycarousel.com
+    dev: https://familyservice-dev.familycarousel.com
+    prod: https://familyservice.familycarousel.com
   webpack:
     webpackConfig: "webpack.config.js"
     includeModules: true
@@ -71,9 +71,9 @@ functions:
         path: /graphql
         method: post
         cors: true
-        #private: true
+        private: true
     - http:
         path: /graphql
         method: get
         cors: true
-        #private: true
+        private: true

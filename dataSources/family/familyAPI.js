@@ -11,7 +11,6 @@ module.exports = class familyAPI extends RESTDataSource {
     }
 
     async willSendRequest(request) {
-        console.log(request);
         request.headers.set('x-api-key', apiKey);
     }
 
