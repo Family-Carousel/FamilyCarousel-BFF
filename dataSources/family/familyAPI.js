@@ -35,7 +35,7 @@ module.exports = class familyAPI extends RESTDataSource {
 
     async createFamily(familyData) {
         try {
-            return await this.post('family', { data: familyData });
+            return await this.post('family',  JSON.stringify(familyData) );
         } catch (err) {
             console.error('BFF - Failed to create family :', err);
             throw('BFF - Failed to create family');
@@ -44,7 +44,7 @@ module.exports = class familyAPI extends RESTDataSource {
 
     async updateFamily(familyData) {
         try {
-            return await this.put('family', { data: familyData });
+            return await this.put('family', JSON.stringify(familyData));
         } catch (err) {
             console.error('BFF - Failed to update family :', err);
             throw('BFF - Failed to update family');
