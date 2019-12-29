@@ -19,6 +19,14 @@ const typeDefs = gql`
         Minor: Boolean
     }
 
+    "Notification"
+    type Notification {
+        acknowledged: Boolean
+        Message: String
+        CreatedDateTime: String
+        AcknowledgedDateTime: String
+    }
+
     "Family Member"
     type Member {
         Id: ID
@@ -31,6 +39,7 @@ const typeDefs = gql`
         Age: Int
         Invite: Invite
         Profile: Profile
+        Notifications: [Notification]
     }
 
     "Family Template"
@@ -42,6 +51,7 @@ const typeDefs = gql`
         Size: String
         Members: [Member]
         IsActive: String
+        Notifications: [Notification]
         CreatedBy: String
         CreatedDateTime: String
         LastUpdateBy: String
@@ -59,10 +69,17 @@ const typeDefs = gql`
         Description: String
     }
 
+    "Input Invite Data"
+    type InviteInput {
+        SentById: ID!
+        SentToEmail: String!
+    }
+
     type Mutation {
         createFamily(input: FamilyInput!): FamilyTemplate
         updateFamily(FamilyId: ID!, input: FamilyInput!): FamilyTemplate
         deleteFamily(FamilyId: ID!): FamilyTemplate
+        sendInvite(FamilyId: ID!, input: InviteInput): Invite
     }
 `;
 
