@@ -36,6 +36,8 @@ const typeDefs = gql`
         ManagedUser: Boolean
         InvitedBy: ID
         EmailAddress: String
+        Subscriber: Boolean
+        SubscriptionType: String
         Age: Int
         Invite: Invite
         Profile: Profile
@@ -79,7 +81,6 @@ const typeDefs = gql`
         createFamily(input: FamilyInput!): FamilyTemplate
         updateFamily(FamilyId: ID!, input: FamilyInput!): FamilyTemplate
         deleteFamily(FamilyId: ID!): FamilyTemplate
-        sendInvite(FamilyId: ID!, input: InviteInput): Invite
     }
 `;
 
