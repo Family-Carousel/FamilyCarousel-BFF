@@ -2,12 +2,43 @@ const { gql } = require('apollo-server-lambda');
 
 const typeDefs = gql`
 
+    "Invite Data"
+    type Invite {
+        SentById: ID
+        Accepted: Boolean
+        AcceptedDate: String
+        SentToEmail: String
+        SentToId: ID
+    }
+
+    "Member Profile"
+    type Profile {
+        FavoriteFood: ID
+        FavoriteColor: String
+        CelabrateBirthday: Boolean
+        Minor: Boolean
+    }
+
+    "Family Member"
+    type Member {
+        Id: ID
+        FirstName: String
+        LastName: String
+        DateOfBirth: String
+        InvitedBy: ID
+        Age: Int
+        Invite: Invite
+        Profile: Profile
+    }
+
     "Family Template"
     type FamilyTemplate {
-        FamilyId: ID!
-        MemberId: ID!
+        Id: ID!
+        CreatedByMemberId: ID!
         Name: String
         Description: String
+        Size: String
+        Members: [Member]
         IsActive: String
         CreatedBy: String
         CreatedDateTime: String
@@ -21,14 +52,14 @@ const typeDefs = gql`
     }
 
     input FamilyInput{
-        FamilyId: ID
-        FamilyName: String
-        FamilyDescription: String
+        CreatedByMemberId: ID!
+        Name: String!
+        Description: String
     }
 
     type Mutation {
         createFamily(input: FamilyInput!): FamilyTemplate
-        updateFamily(FamilyId: ID!, input: FamilyInput): FamilyTemplate
+        updateFamily(FamilyId: ID!, input: FamilyInput!): FamilyTemplate
         deleteFamily(FamilyId: ID!): FamilyTemplate
     }
 `;
