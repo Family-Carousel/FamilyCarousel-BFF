@@ -25,7 +25,9 @@ const typeDefs = gql`
         FirstName: String
         LastName: String
         DateOfBirth: String
+        ManagedUser: Boolean
         InvitedBy: ID
+        EmailAddress: String
         Age: Int
         Invite: Invite
         Profile: Profile
