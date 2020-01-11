@@ -5,7 +5,7 @@ provider:
   runtime: nodejs8.10
   region: us-east-2
   profile: ${opt:profile, 'default'}
-  memorySize: 1280
+  memorySize: 256
   logRetentionInDays: 3
   stage: ${opt:stage, 'dev'}
   apiKeys: 
