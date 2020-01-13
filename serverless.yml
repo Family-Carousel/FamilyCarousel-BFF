@@ -1,0 +1,79 @@
+service: familycarousel-bff
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-2
+  profile: ${opt:profile, 'default'}
+  memorySize: 256
+  logRetentionInDays: 3
+  stage: ${opt:stage, 'dev'}
+  apiKeys: 
+    - FamilyCarousel-BFF-${self:provider.stage}
+  usagePlan:
+    quota:
+      limit: 1000
+      period: DAY
+    throttle:
+      burstLimit: 1000
+      rateLimit: 1000
+  environment:
+    NODE_ENV: ${self:provider.stage}
+    AWS_PROFILE: ${self:provider.profile}
+    FAMILY_SERVICE_API_KEY: ${ssm:/familycarousel/${self:provider.stage}/familyservice~true}
+    FAMILY_SERVICE_BASE_URL: ${self:custom.FamilyServiceUrl.${self:provider.stage}}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "logs:*"
+      Resource: "*"
+
+custom:
+  FamilyServiceUrl:
+    dev: https://familyservice-dev.familycarousel.com
+    prod: https://familyservice.familycarousel.com
+  webpack:
+    webpackConfig: "webpack.config.js"
+    includeModules: true
+    packager: 'yarn'
+  serverless-offline:
+    host: 0.0.0.0
+  FamilyCarouselDomainMap:
+    dev: bff-dev.familycarousel.com
+    prod: bff.familycarousel.com
+  FamilyCarouselCertMap:
+    dev: '*.familycarousel.com'
+    prod: '*.familycarousel.com'
+  customDomain:
+    domainName: ${self:custom.FamilyCarouselDomainMap.${self:provider.stage}}
+    certificateName: ${self:custom.FamilyCarouselCertMap.${self:provider.stage}}
+    createRoute53Record: true
+    endpointType: 'regional'
+
+package: 
+  individiually: true
+  excludeDevDependencies: false
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+  - serverless-domain-manager
+  - serverless-plugin-optimize
+
+functions:
+  graphql:
+    name: FamilyCarousel-bff-${self:provider.stage}
+    handler: handlers/handler.graphql
+    description: Lambda for family carousel graphql service
+    optimize: false
+    events:
+    - http:
+        path: /graphql
+        method: post
+        cors: true
+        private: true
+    - http:
+        path: /graphql
+        method: get
+        cors: true
+        private: true
