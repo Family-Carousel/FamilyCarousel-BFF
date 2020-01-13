@@ -33,8 +33,8 @@ const typeDefs = gql`
     }
 
     type Query {
-        getFamilyByFamilyId("Custom String" FamilyId: ID!): Family  
-        listFamiliesbyMemberId("Custom String" MemberId: ID!): [Family]
+        getFamilyByFamilyId("Custom String" Id: ID!): Family  
+        listFamiliesbyMemberId("Custom String" Id: ID!): [Family]
     }
 
     input FamilyInput{
@@ -45,6 +45,7 @@ const typeDefs = gql`
     }
 
     input MemberInput{
+        Id: ID!
         FirstName: String!
         LastName: String
         DateOfBirth: String

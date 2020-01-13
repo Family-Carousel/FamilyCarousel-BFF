@@ -1,10 +1,10 @@
 module.exports = {
   Query: {
-    getFamilyByFamilyId: async (_, { familyId }, { dataSources }) => {
-      return await dataSources.familyAPI.getFamily(familyId);
+    getFamilyByFamilyId: async (_, { Id }, { dataSources }) => {
+      return await dataSources.familyAPI.getFamily(Id);
     },
-    listFamiliesbyMemberId: async (_, { memberId }, { dataSources }) => {
-      return await dataSources.familyAPI.getAllFamiliesForMemberId(memberId);
+    listFamiliesbyMemberId: async (_, { Id }, { dataSources }) => {
+      return await dataSources.familyAPI.getAllFamiliesForMemberId(Id);
     }
   },
   FamilyTemplate: {
