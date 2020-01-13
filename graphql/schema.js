@@ -2,58 +2,30 @@ const { gql } = require('apollo-server-lambda');
 
 const typeDefs = gql`
 
-    "Invite Data"
-    type Invite {
-        SentById: ID
-        Accepted: Boolean
-        AcceptedDate: String
-        SentToEmail: String
-        SentToId: ID
-    }
-
-    "Member Profile"
-    type Profile {
-        FavoriteFood: ID
-        FavoriteColor: String
-        CelabrateBirthday: Boolean
-        Minor: Boolean
-    }
-
-    "Notification"
-    type Notification {
-        acknowledged: Boolean
-        Message: String
-        CreatedDateTime: String
-        AcknowledgedDateTime: String
-    }
-
     "Family Member"
     type Member {
-        Id: ID
-        FirstName: String
+        Id: ID!
+        FirstName: String!
         LastName: String
         DateOfBirth: String
         ManagedUser: Boolean
-        InvitedBy: ID
-        EmailAddress: String
-        Subscriber: Boolean
-        SubscriptionType: String
-        Age: Int
-        Invite: Invite
-        Profile: Profile
-        Notifications: [Notification]
+        EmailAddress: String!
+        Age: Int!
+        CreatedBy: String
+        CreatedDateTime: String
+        LastUpdateBy: String
+        LastUpdateDateTime: String
     }
 
     "Family Template"
-    type FamilyTemplate {
+    type Family {
         Id: ID!
-        CreatedByMemberId: ID!
-        Name: String
+        Name: String!
         Description: String
         Size: String
+        FamilyCreater: Member!
         Members: [Member]
         IsActive: String
-        Notifications: [Notification]
         CreatedBy: String
         CreatedDateTime: String
         LastUpdateBy: String
@@ -61,26 +33,33 @@ const typeDefs = gql`
     }
 
     type Query {
-        getFamilyByFamilyId("Custom String" FamilyId: ID!): FamilyTemplate  
-        listFamiliesbyMemberId("Custom String" MemberId: ID!): [FamilyTemplate]
+        getFamilyByFamilyId("Custom String" FamilyId: ID!): Family  
+        listFamiliesbyMemberId("Custom String" MemberId: ID!): [Family]
     }
 
     input FamilyInput{
-        CreatedByMemberId: ID!
+        FamilyCreater: ID!
         Name: String!
         Description: String
+        Size: String
     }
 
-    "Input Invite Data"
-    type InviteInput {
-        SentById: ID!
-        SentToEmail: String!
+    input MemberInput{
+        FirstName: String!
+        LastName: String
+        DateOfBirth: String
+        Size: String
+        EmailAddress: String!
+        Age: Int!
     }
 
     type Mutation {
-        createFamily(input: FamilyInput!): FamilyTemplate
-        updateFamily(FamilyId: ID!, input: FamilyInput!): FamilyTemplate
-        deleteFamily(FamilyId: ID!): FamilyTemplate
+        createFamily(input: FamilyInput!): Family
+        updateFamily(Id: ID!, input: FamilyInput!): Family
+        deleteFamily(Id: ID!): Family
+        createMember(input: MemberInput!): Member
+        updateMember(Id: ID!, input: MemberInput!): Member
+        deleteMember(Id: ID!): Member
     }
 `;
 

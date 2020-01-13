@@ -15,18 +15,18 @@ module.exports = class familyAPI extends RESTDataSource {
         request.headers.set('Content-Type', 'application/json')
     }
 
-    async getAllFamiliesForMemberId(memberId) {
+    async getAllFamiliesForMemberId(id) {
         try {
-            return await this.get('family/' + {memberId: memberId});
+            return await this.get('family/' + {memberId: id});
         } catch (err) {
             console.error('BFF - Failed to get list of family :', err);
             throw('BFF - Failed to get list of family');
         }
     }
     
-    async getFamily(familyId) {
+    async getFamily(id) {
         try {
-            return await this.get('family/' + familyId);
+            return await this.get('family/' + id);
         } catch (err) {
             console.error('BFF - Failed to get family :', err);
             throw('BFF - Failed to get family');
@@ -57,6 +57,42 @@ module.exports = class familyAPI extends RESTDataSource {
         } catch (err) {
             console.error('BFF - Failed to delete family :', err);
             throw('BFF - Failed to delete family');
+        }
+    }
+
+    async getMember(id) {
+        try {
+            return await this.get('member/' + id);
+        } catch (err) {
+            console.error('BFF - Failed to get member :', err);
+            throw('BFF - Failed to get member');
+        }
+    }
+
+    async createMember(memberData) {
+        try {
+            return await this.post('member',  JSON.stringify(memberData) );
+        } catch (err) {
+            console.error('BFF - Failed to create member :', err);
+            throw('BFF - Failed to create member');
+        }
+    }
+
+    async updateMember(memberData) {
+        try {
+            return await this.put('member', JSON.stringify(memberData));
+        } catch (err) {
+            console.error('BFF - Failed to update member :', err);
+            throw('BFF - Failed to update member');
+        }
+    }
+
+    async deleteMember(id) {
+        try {
+            return await this.delete('member/' + id);
+        } catch (err) {
+            console.error('BFF - Failed to delete member :', err);
+            throw('BFF - Failed to delete member');
         }
     }
 }
