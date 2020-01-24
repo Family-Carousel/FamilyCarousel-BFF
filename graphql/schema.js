@@ -11,8 +11,8 @@ const typeDefs = gql`
         ManagedUser: Boolean
         EmailAddress: String!
         Age: Int!
-        CreatedBy: String
-        CreatedDateTime: String
+        CreateBy: String
+        CreateDateTime: String
         LastUpdateBy: String
         LastUpdateDateTime: String
     }
