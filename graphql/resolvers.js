@@ -25,20 +25,26 @@ module.exports = {
     createFamily: async (_, { input }, { dataSources }) => {
       return await dataSources.familyAPI.createFamily(input);
     },
-    updateFamily: async (_, { input }, { dataSources }) => {
-      return await dataSources.familyAPI.updateFamily(input);
+    updateFamily: async (_, { Id, input }, { dataSources }) => {
+      return await dataSources.familyAPI.updateFamily(Id, input);
     },
-    deleteFamily: async (_, { id }, { dataSources }) => {
-      return await dataSources.familyAPI.deleteFamily(id);
+    deleteFamily: async (_, { Id }, { dataSources }) => {
+      return await dataSources.familyAPI.deleteFamily(Id);
     },
     createMember: async (_, { input }, { dataSources }) => {
       return await dataSources.familyAPI.createMember(input);
     },
-    updateMember: async (_, { input }, { dataSources }) => {
-      return await dataSources.familyAPI.updateMember(input);
+    updateMemberForFamily: async (_, { Id, FamilyId, input }, { dataSources }) => {
+      return await dataSources.familyAPI.updateMemberForFamily(Id, FamilyId, input);
     },
-    deleteMember: async (_, { id }, { dataSources }) => {
-      return await dataSources.familyAPI.deleteMember(id);
+    updateMemberGlobally: async (_, { Id, input }, { dataSources }) => {
+      return await dataSources.familyAPI.updateMemberGlobally(Id, input);
+    },
+    deleteMemberFromFamily: async (_, { Id, FamilyId }, { dataSources }) => {
+      return await dataSources.familyAPI.deleteMemberFromFamily(Id, FamilyId);
+    },
+    deleteMember: async (_, { Id }, { dataSources }) => {
+      return await dataSources.familyAPI.deleteMember(Id);
     }
   }
 };

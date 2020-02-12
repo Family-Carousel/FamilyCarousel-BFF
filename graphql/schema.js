@@ -64,9 +64,9 @@ const typeDefs = gql`
         updateFamily(Id: ID!, input: FamilyInput!): Family
         deleteFamily(Id: ID!): Family
         createMember(input: MemberInput!): Member
-        updateMemberForFamily(Id: ID!, familyId:ID!, input: MemberInput!): Member
+        updateMemberForFamily(Id: ID!, FamilyId:ID!, input: MemberInput!): Member
         updateMemberGlobally(Id: ID!, input: MemberInput!): Member
-        deleteMemberFromFamily(Id: ID!, familyId: ID!): Member
+        deleteMemberFromFamily(Id: ID!, FamilyId: ID!): Member
         deleteMember(Id: ID!): Member
     }
 `;
