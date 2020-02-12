@@ -16,30 +16,39 @@ module.exports = class familyAPI extends RESTDataSource {
 
   // QUERIES
 
-  async getAllFamiliesForMemberId(id) {
+  async getFamilyById(id) {
     try {
-      return await this.get('family/' + { memberId: id });
-    } catch (err) {
-      console.error('BFF - Failed to get list of family :', err);
-      throw 'BFF - Failed to get list of family';
-    }
-  }
-
-  async getFamily(id) {
-    try {
-      return await this.get('family/' + id);
+      return await this.get(`family/${id}`);
     } catch (err) {
       console.error('BFF - Failed to get family :', err);
       throw 'BFF - Failed to get family';
     }
   }
 
-  async getMember(id) {
+  async getMemberById(id) {
     try {
-      return await this.get('member/' + id);
+      return await this.get(`member/${id}`);
     } catch (err) {
       console.error('BFF - Failed to get member :', err);
       throw 'BFF - Failed to get member';
+    }
+  }
+
+  async listAllMembersForFamily(familyId) {
+    try {
+      return await this.get(`family/${familyId}`);
+    } catch (err) {
+      console.error('BFF - Failed to get list of members in family :', err);
+      throw 'BFF - Failed to get list of members in family';
+    }
+  }
+
+  async listAllFamiliesForMember(id) {
+    try {
+      return await this.get(`family/${id}`);
+    } catch (err) {
+      console.error('BFF - Failed to get list of families by member :', err);
+      throw 'BFF - Failed to get list of families by member';
     }
   }
 

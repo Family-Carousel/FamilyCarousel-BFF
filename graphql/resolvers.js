@@ -1,24 +1,16 @@
 module.exports = {
   Query: {
-    getFamilyByFamilyId: async (_, { Id }, { dataSources }) => {
-      return await dataSources.familyAPI.getFamily(Id);
+    getFamilyById: async (_, { Id }, { dataSources }) => {
+      return await dataSources.familyAPI.getFamilyById(Id);
     },
-    listFamiliesbyMemberId: async (_, { Id }, { dataSources }) => {
-      return await dataSources.familyAPI.getAllFamiliesForMemberId(Id);
-    }
-  },
-  FamilyTemplate: {
-    Members: async (_, { input }, { dataSources }) => {
-      let members = [];
-      for (let m; m >= _.length; m++) {
-        let member = await dataSources.familyAPI.getMember(_[m].Id);
-        members.push(member);
-      }
-      return members;
+    getMemberById: async (_, { Id }, { dataSources }) => {
+      return await dataSources.familyAPI.getMemberById(Id);
     },
-    FamilyCreater: async (_, { input }, { dataSources }) => {
-      let member = await dataSources.familyAPI.getMember(_.Id);
-      return member;
+    listAllMembersForFamily: async (_, { FamilyId }, { dataSources }) => {
+      return await dataSources.familyAPI.listAllMembersForFamily(FamilyId);
+    },
+    listAllFamiliesForMember: async (_, { Id }, { dataSources }) => {
+      return await dataSources.familyAPI.listAllFamiliesForMember(Id);
     }
   },
   Mutation: {
