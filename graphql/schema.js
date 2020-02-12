@@ -5,10 +5,11 @@ const typeDefs = gql`
     "Family Member"
     type Member {
         Id: ID!
+        FamilyId: ID!
         FirstName: String!
         LastName: String
-        DateOfBirth: String
-        ManagedUser: Boolean
+        DateOfBirth: String!
+        ManagedUser: Boolean!
         EmailAddress: String!
         Age: Int!
         CreateBy: String
@@ -17,41 +18,45 @@ const typeDefs = gql`
         LastUpdateDateTime: String
     }
 
-    "Family Template"
+    "Family"
     type Family {
         Id: ID!
         Name: String!
+        FamilyOwner: String!
         Description: String
-        Size: String
-        FamilyCreater: Member!
         Members: [Member]
-        IsActive: String
-        CreatedBy: String
-        CreatedDateTime: String
+        Size: String
+        IsActive: String!
+        CreateBy: String
+        CreateDateTime: String
         LastUpdateBy: String
         LastUpdateDateTime: String
     }
 
     type Query {
-        getFamilyByFamilyId("Custom String" Id: ID!): Family  
-        listFamiliesbyMemberId("Custom String" Id: ID!): [Family]
+        getFamilyById("Custom String" Id: ID!): Family 
+        getMemberById("Custom String" Id: ID!): Member   
+        listAllMembersForFamily("Custom String" FamilyId: ID!): [Member]
+        listAllFamiliesForMember("Custom String" Id: ID!): [Family]
     }
 
     input FamilyInput{
-        FamilyCreater: ID!
         Name: String!
+        UserId: String!
+        FamilyOwner: ID!
         Description: String
-        Size: String
+        Size: String!
     }
 
     input MemberInput{
         Id: ID!
+        UserId: ID!
+        FamilyId: ID!
         FirstName: String!
         LastName: String
-        DateOfBirth: String
-        Size: String
+        DateOfBirth: String!
+        ManagedUser: Boolean!
         EmailAddress: String!
-        Age: Int!
     }
 
     type Mutation {
@@ -59,7 +64,9 @@ const typeDefs = gql`
         updateFamily(Id: ID!, input: FamilyInput!): Family
         deleteFamily(Id: ID!): Family
         createMember(input: MemberInput!): Member
-        updateMember(Id: ID!, input: MemberInput!): Member
+        updateMemberForFamily(Id: ID!, familyId:ID!, input: MemberInput!): Member
+        updateMemberGlobally(Id: ID!, input: MemberInput!): Member
+        deleteMemberFromFamily(Id: ID!, familyId: ID!): Member
         deleteMember(Id: ID!): Member
     }
 `;
