@@ -40,11 +40,13 @@ const typeDefs = gql`
   }
 
   input FamilyInput {
+    Id: String
     Name: String!
     UserId: String!
     FamilyOwner: ID!
     Description: String
     Size: Int!
+    IsActive: Boolean
   }
 
   input MemberInput {
@@ -61,12 +63,12 @@ const typeDefs = gql`
   type Mutation {
     createFamily(input: FamilyInput!): Family
     updateFamily(Id: ID!, input: FamilyInput!): Family
-    deleteFamily(Id: ID!): Family
+    deleteFamily(Id: ID!): String
     createMember(input: MemberInput!): Member
     updateMemberForFamily(Id: ID!, FamilyId: ID!, input: MemberInput!): Member
     updateMemberGlobally(Id: ID!, input: MemberInput!): Member
-    deleteMemberFromFamily(Id: ID!, FamilyId: ID!): Member
-    deleteMember(Id: ID!): Member
+    deleteMemberFromFamily(Id: ID!, FamilyId: ID!): String
+    deleteMember(Id: ID!): String
   }
 `;
 

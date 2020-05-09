@@ -52,7 +52,7 @@ custom:
 
 package:
   individiually: true
-  excludeDevDependencies: false
+  excludeDevDependencies: true
 
 plugins:
   - serverless-offline
