@@ -11,7 +11,7 @@ module.exports = {
     },
     listAllFamiliesForMember: async (_, { Id }, { dataSources }) => {
       return await dataSources.familyAPI.listAllFamiliesForMember(Id);
-    }
+    },
   },
   Mutation: {
     createFamily: async (_, { input }, { dataSources }) => {
@@ -26,8 +26,16 @@ module.exports = {
     createMember: async (_, { input }, { dataSources }) => {
       return await dataSources.familyAPI.createMember(input);
     },
-    updateMemberForFamily: async (_, { Id, FamilyId, input }, { dataSources }) => {
-      return await dataSources.familyAPI.updateMemberForFamily(Id, FamilyId, input);
+    updateMemberForFamily: async (
+      _,
+      { Id, FamilyId, input },
+      { dataSources }
+    ) => {
+      return await dataSources.familyAPI.updateMemberForFamily(
+        Id,
+        FamilyId,
+        input
+      );
     },
     updateMemberGlobally: async (_, { Id, input }, { dataSources }) => {
       return await dataSources.familyAPI.updateMemberGlobally(Id, input);
@@ -37,6 +45,6 @@ module.exports = {
     },
     deleteMember: async (_, { Id }, { dataSources }) => {
       return await dataSources.familyAPI.deleteMember(Id);
-    }
-  }
+    },
+  },
 };

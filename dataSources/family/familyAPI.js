@@ -21,7 +21,7 @@ module.exports = class familyAPI extends RESTDataSource {
       return await this.get(`family/${id}`);
     } catch (err) {
       console.error('BFF - Failed to get family :', err);
-      throw 'BFF - Failed to get family';
+      throw new Error('BFF - Failed to get family' + err.message);
     }
   }
 
@@ -30,25 +30,31 @@ module.exports = class familyAPI extends RESTDataSource {
       return await this.get(`member/${id}`);
     } catch (err) {
       console.error('BFF - Failed to get member :', err);
-      throw 'BFF - Failed to get member';
+      throw new Error('BFF - Failed to get member' + err.message);
     }
   }
 
   async listAllMembersForFamily(familyId) {
     try {
-      return await this.get(`family/${familyId}`);
+      let response = await this.get(`family/${familyId}/member`);
+      console.log(response);
+      return response;
     } catch (err) {
       console.error('BFF - Failed to get list of members in family :', err);
-      throw 'BFF - Failed to get list of members in family';
+      throw new Error(
+        'BFF - Failed to get list of members in family' + err.message
+      );
     }
   }
 
   async listAllFamiliesForMember(id) {
     try {
-      return await this.get(`family/${id}`);
+      return await this.get(`member/${id}/family`);
     } catch (err) {
       console.error('BFF - Failed to get list of families by member :', err);
-      throw 'BFF - Failed to get list of families by member';
+      throw new Error(
+        'BFF - Failed to get list of families by member' + err.message
+      );
     }
   }
 
@@ -59,7 +65,7 @@ module.exports = class familyAPI extends RESTDataSource {
       return await this.post('family', JSON.stringify(familyData));
     } catch (err) {
       console.error('BFF - Failed to create family :', err);
-      throw new Error('BFF - Failed to create family');
+      throw new Error('BFF - Failed to create family' + err.message);
     }
   }
 
@@ -68,7 +74,7 @@ module.exports = class familyAPI extends RESTDataSource {
       return await this.put(`family/${id}`, JSON.stringify(familyData));
     } catch (err) {
       console.error('BFF - Failed to update family :', err);
-      throw new Error('BFF - Failed to update family');
+      throw new Error('BFF - Failed to update family' + err.message);
     }
   }
 
@@ -77,7 +83,7 @@ module.exports = class familyAPI extends RESTDataSource {
       return await this.delete(`family/${id}`);
     } catch (err) {
       console.error('BFF - Failed to delete family :', err);
-      throw new Error('BFF - Failed to delete family');
+      throw new Error('BFF - Failed to delete family' + err.message);
     }
   }
 
@@ -86,16 +92,19 @@ module.exports = class familyAPI extends RESTDataSource {
       return await this.post('member', JSON.stringify(memberData));
     } catch (err) {
       console.error('BFF - Failed to create member :', err);
-      throw new Error('BFF - Failed to create member');
+      throw new Error('BFF - Failed to create member' + err.message);
     }
   }
 
   async updateMemberForFamily(id, familyId, memberData) {
     try {
-      return await this.put(`member/${id}/family/${familyId}`, JSON.stringify(memberData));
+      return await this.put(
+        `member/${id}/family/${familyId}`,
+        JSON.stringify(memberData)
+      );
     } catch (err) {
       console.error('BFF - Failed to update member for family :', err);
-      throw new Error('BFF - Failed to update member for family');
+      throw new Error('BFF - Failed to update member for family' + err.message);
     }
   }
 
@@ -104,7 +113,7 @@ module.exports = class familyAPI extends RESTDataSource {
       return await this.put(`member/${id}`, JSON.stringify(memberData));
     } catch (err) {
       console.error('BFF - Failed to update member globally :', err);
-      throw new Error('BFF - Failed to update member globally');
+      throw new Error('BFF - Failed to update member globally' + err.message);
     }
   }
 
@@ -113,7 +122,7 @@ module.exports = class familyAPI extends RESTDataSource {
       return await this.delete(`member/${id}/family/${familyId}`);
     } catch (err) {
       console.error('BFF - Failed to delete member in family :', err);
-      throw new Error('BFF - Failed to delete member in family');
+      throw new Error('BFF - Failed to delete member in family' + err.message);
     }
   }
 
@@ -122,7 +131,9 @@ module.exports = class familyAPI extends RESTDataSource {
       return await this.delete(`member/${id}`);
     } catch (err) {
       console.error('BFF - Failed to delete member in all families :', err);
-      throw new Error('BFF - Failed to delete member in all families');
+      throw new Error(
+        'BFF - Failed to delete member in all families' + err.message
+      );
     }
   }
 };

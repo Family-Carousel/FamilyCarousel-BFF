@@ -10,7 +10,7 @@ let contextMethod = ({ event, context }) => ({
   headers: event.headers,
   functionName: context.functionName,
   event,
-  context
+  context,
 });
 
 let apolloSettings = {
@@ -18,20 +18,18 @@ let apolloSettings = {
   resolvers: resolvers,
   dataSources: () => {
     return {
-      familyAPI: new familyAPI()
-    }
+      familyAPI: new familyAPI(),
+    };
   },
   validationRules: [depthLimit(6)],
-  context: contextMethod
+  context: contextMethod,
 };
 
 const server = new ApolloServer(apolloSettings);
 
-module.exports.graphql = server.createHandler(
-  {
-    cors: {
-      origin: '*',
-      credentials: true
-    }
-  }
-);
+module.exports.graphql = server.createHandler({
+  cors: {
+    origin: '*',
+    credentials: true,
+  },
+});
