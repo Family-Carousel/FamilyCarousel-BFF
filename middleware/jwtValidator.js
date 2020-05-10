@@ -1,13 +1,46 @@
 'use strict';
-const AuthenticationClient = require('auth0').OAuthAuthenticator;
+const jwksRsa = require('jwks-rsa-promisified');
+const jwt = require('jsonwebtoken');
+const { AuthenticationError } = require('apollo-server-lambda');
+
+const client = jwksRsa({
+  strictSsl: true, // Default value
+  jwksUri:
+    'https://' +
+    process.env.FAMILY_SERVICE_OAUTH_URL +
+    '/.well-known/jwks.json',
+});
 
 module.exports = {
-    validateJwt: async (jwt) => {
-        try {
-            AuthenticationClient.
-        } catch (err) {
-            console.error('Failed to validate JWT Token: ', err);
-            throw new Error('Failed to validate JWT Token: ' + err.message);
-        }
+  validateJwt: async (token) => {
+    try {
+      if (!token) {
+        return new AuthenticationError('Not authorised');
+      }
+
+      const tokenParts = token.split(' ');
+      const tokenValue = tokenParts[1];
+
+      if (!(tokenParts[0].toLowerCase() === 'bearer' && tokenValue)) {
+        return new AuthenticationError('Not authorised');
+      }
+
+      const decodedToken = jwt.decode(tokenValue, { complete: true });
+
+      const key = await client.getSigningKeyAsync(decodedToken.header.kid);
+
+      const publicKey = key.getPublicKey();
+
+      let response = jwt.verify(tokenValue, publicKey, { complete: true });
+
+      if (!response.payload || !response.header || !response.signature) {
+        return new AuthenticationError('Not authorised');
+      }
+
+      return true;
+    } catch (err) {
+      console.error('Failed to validate JWT Token: ', err);
+      return new AuthenticationError('Not authorised');
     }
+  },
 };

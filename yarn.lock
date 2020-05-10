@@ -3112,7 +3112,7 @@ blob@0.0.5:
   resolved "https://registry.yarnpkg.com/blob/-/blob-0.0.5.tgz#d680eeef25f8cd91ad533f5b01eed48e64caf683"
   integrity sha512-gaqbzQPqOoamawKg0LGVd7SzLgXS+JH61oWprSLH+P+abTczqJbhTR8CmJ2u9/bUYNmHTGJx/UEmn6doAvvuig==
 
-bluebird@^3.5.0, bluebird@^3.5.3, bluebird@^3.5.5, bluebird@^3.7.2:
+bluebird@^3.5.0, bluebird@^3.5.1, bluebird@^3.5.3, bluebird@^3.5.5, bluebird@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
@@ -7456,7 +7456,15 @@ jwa@^1.4.1:
     ecdsa-sig-formatter "1.0.11"
     safe-buffer "^5.0.1"
 
-jwks-rsa@^1.8.0:
+jwks-rsa-promisified@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/jwks-rsa-promisified/-/jwks-rsa-promisified-1.0.2.tgz#55b46b4091bbc59cdf83756a9aa0c055eddcf125"
+  integrity sha512-dWTeoL2XAYCEo+O/WebdHmocnZxTeyfX5AzIVo8UoXvE36b2+2pBc+rcAQZbV8s9qIfo6e+zz1njzaXp/RJf3Q==
+  dependencies:
+    bluebird "^3.5.1"
+    jwks-rsa "^1.2.1"
+
+jwks-rsa@^1.2.1, jwks-rsa@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-1.8.0.tgz#4b13d962f82128ed06e30c7cc9d3a04652c1ec7c"
   integrity sha512-+HYROHD5fsYQCNrJ37RSr2NjbN2/V9YT+yVF3oJxLmPIZWrmp1SOl1hMw2RcuNh+LGA2bGZIhRKGiMjhQa/b7Q==
