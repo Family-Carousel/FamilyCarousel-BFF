@@ -8,7 +8,7 @@ provider:
   memorySize: 256
   logRetentionInDays: 3
   stage: ${opt:stage, 'dev'}
-  apiKeys: 
+  apiKeys:
     - FamilyCarousel-BFF-${self:provider.stage}
   usagePlan:
     quota:
@@ -20,20 +20,26 @@ provider:
   environment:
     NODE_ENV: ${self:provider.stage}
     AWS_PROFILE: ${self:provider.profile}
-    FAMILY_SERVICE_API_KEY: ${ssm:/familycarousel/${self:provider.stage}/familyservice~true}
+    FAMILY_SERVICE_OAUTH_CLIENTID: ${ssm:/familycarousel/${self:provider.stage}/oauth/clientid~true}
+    FAMILY_SERVICE_OAUTH_CLIENTSECRET: ${ssm:/familycarousel/${self:provider.stage}/oauth/clientsecret~true}
     FAMILY_SERVICE_BASE_URL: ${self:custom.FamilyServiceUrl.${self:provider.stage}}
+    FAMILY_SERVICE_AUDIENCE_URL: ${self:custom.FamilyServiceAudience.${self:provider.stage}}
+    FAMILY_SERVICE_OAUTH_URL: familycarousel.auth0.com
   iamRoleStatements:
-    - Effect: "Allow"
+    - Effect: 'Allow'
       Action:
-        - "logs:*"
-      Resource: "*"
+        - 'logs:*'
+      Resource: '*'
 
 custom:
   FamilyServiceUrl:
     dev: https://familyservice-dev.familycarousel.com
     prod: https://familyservice.familycarousel.com
+  FamilyServiceAudience:
+    dev: familyservice-dev.familycarousel.com
+    prod: familyservice.familycarousel.com
   webpack:
-    webpackConfig: "webpack.config.js"
+    webpackConfig: 'webpack.config.js'
     includeModules: true
     packager: 'yarn'
   serverless-offline:
@@ -50,9 +56,9 @@ custom:
     createRoute53Record: true
     endpointType: 'regional'
 
-package: 
+package:
   individiually: true
-  excludeDevDependencies: false
+  excludeDevDependencies: true
 
 plugins:
   - serverless-offline
@@ -67,13 +73,13 @@ functions:
     description: Lambda for family carousel graphql service
     optimize: false
     events:
-    - http:
-        path: /graphql
-        method: post
-        cors: true
-        private: true
-    - http:
-        path: /graphql
-        method: get
-        cors: true
-        private: true
+      - http:
+          path: /graphql
+          method: post
+          cors: true
+          private: true
+      - http:
+          path: /graphql
+          method: get
+          cors: true
+          private: true
