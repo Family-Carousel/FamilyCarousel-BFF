@@ -19,7 +19,7 @@ const typeDefs = gql`
 
   "Family"
   type Family {
-    Id: ID!
+    Id: ID! 
     Name: String!
     FamilyOwner: String!
     Description: String
