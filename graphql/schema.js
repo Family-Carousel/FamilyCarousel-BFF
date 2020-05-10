@@ -11,25 +11,25 @@ const typeDefs = gql`
     ManagedUser: Boolean!
     EmailAddress: String!
     Age: Int!
-    CreateBy: String
-    CreateDateTime: String
-    LastUpdateBy: String
-    LastUpdateDateTime: String
+    CreateBy: String!
+    CreateDateTime: String!
+    LastUpdateBy: String!
+    LastUpdateDateTime: String!
   }
 
   "Family"
   type Family {
-    Id: ID
-    Name: String
-    FamilyOwner: String
+    Id: ID!
+    Name: String!
+    FamilyOwner: String!
     Description: String
     Members: [Member]
-    Size: Int
-    IsActive: String
-    CreateBy: String
-    CreateDateTime: String
-    LastUpdateBy: String
-    LastUpdateDateTime: String
+    Size: Int!
+    IsActive: String!
+    CreateBy: String!
+    CreateDateTime: String!
+    LastUpdateBy: String!
+    LastUpdateDateTime: String!
   }
 
   type Query {
