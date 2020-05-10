@@ -60,7 +60,15 @@ const typeDefs = gql`
     EmailAddress: String!
   }
 
+  input SignUp {
+    Email: String!
+    Password: String!
+    FirstName: String!
+    DateOfBirth: String!
+  }
+
   type Mutation {
+    createUser(input: SignUp!): String
     createFamily(input: FamilyInput!): Family
     updateFamily(Id: ID!, input: FamilyInput!): Family
     deleteFamily(Id: ID!): String

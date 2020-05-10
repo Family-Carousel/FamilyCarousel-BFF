@@ -9,16 +9,11 @@ provider:
   profile: ${opt:profile, 'default'}
   memorySize: 256
   logRetentionInDays: 3
+  logs:
+    httpApi: true
+  httpApi:
+    cors: true
   stage: ${opt:stage, 'dev'}
-  apiKeys:
-    - FamilyCarousel-BFF-${self:provider.stage}
-  usagePlan:
-    quota:
-      limit: 1000
-      period: DAY
-    throttle:
-      burstLimit: 1000
-      rateLimit: 1000
   environment:
     NODE_ENV: ${self:provider.stage}
     AWS_PROFILE: ${self:provider.profile}
@@ -27,6 +22,7 @@ provider:
     FAMILY_SERVICE_BASE_URL: ${self:custom.FamilyServiceUrl.${self:provider.stage}}
     FAMILY_SERVICE_AUDIENCE_URL: ${self:custom.FamilyServiceAudience.${self:provider.stage}}
     FAMILY_SERVICE_OAUTH_URL: familycarousel.auth0.com
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
   iamRoleStatements:
     - Effect: 'Allow'
       Action:
@@ -57,6 +53,7 @@ custom:
     certificateName: ${self:custom.FamilyCarouselCertMap.${self:provider.stage}}
     createRoute53Record: true
     endpointType: 'regional'
+    apiType: http
 
 package:
   individiually: true
@@ -75,13 +72,9 @@ functions:
     description: Lambda for family carousel graphql service
     optimize: false
     events:
-      - http:
+      - httpApi:
           path: /graphql
           method: post
-          cors: true
-          private: true
-      - http:
+      - httpApi:
           path: /graphql
           method: get
-          cors: true
-          private: true

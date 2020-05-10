@@ -3,11 +3,12 @@
 const { ApolloServer, AuthenticationError } = require('apollo-server-lambda');
 const { applyMiddleware } = require('graphql-middleware');
 const { makeExecutableSchema } = require('graphql-tools');
-const { rule, shield, allow } = require('graphql-shield');
+const { rule, shield } = require('graphql-shield');
 const depthLimit = require('graphql-depth-limit');
 const { typeDefs } = require('../graphql/schema');
 const resolvers = require('../graphql/resolvers');
 const familyAPI = require('../dataSources/family/familyAPI');
+const auth0API = require('../dataSources/family/auth0');
 const validater = require('../middleware/jwtValidator');
 
 const isAuthenticated = rule()(async (parent, args, context, info) => {
@@ -39,9 +40,6 @@ const permissions = shield(
     },
   },
   {
-    // Options
-    fallbackRule: allow,
-    fallbackError: 'Not Authorized! You either don\'t have permission to perform this mutation or the mutation has not been added to the list of authorized mutations.',
     allowExternalErrors: true
   }
 );
@@ -66,6 +64,7 @@ let apolloSettings = {
   dataSources: () => {
     return {
       familyAPI: new familyAPI(),
+      // auth0API: new auth0API()
     };
   },
   validationRules: [depthLimit(6)],
