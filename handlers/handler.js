@@ -10,7 +10,7 @@ let contextMethod = ({ event, context }) => ({
   headers: event.headers,
   functionName: context.functionName,
   event,
-  context,
+  context
 });
 
 let apolloSettings = {

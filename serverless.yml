@@ -20,8 +20,11 @@ provider:
   environment:
     NODE_ENV: ${self:provider.stage}
     AWS_PROFILE: ${self:provider.profile}
-    FAMILY_SERVICE_API_KEY: ${ssm:/familycarousel/${self:provider.stage}/familyservice~true}
+    FAMILY_SERVICE_OAUTH_CLIENTID: ${ssm:/familycarousel/${self:provider.stage}/oauth/clientid~true}
+    FAMILY_SERVICE_OAUTH_CLIENTSECRET: ${ssm:/familycarousel/${self:provider.stage}/oauth/clientsecret~true}
     FAMILY_SERVICE_BASE_URL: ${self:custom.FamilyServiceUrl.${self:provider.stage}}
+    FAMILY_SERVICE_AUDIENCE_URL: ${self:custom.FamilyServiceAudience.${self:provider.stage}}
+    FAMILY_SERVICE_OAUTH_URL: familycarousel.auth0.com
   iamRoleStatements:
     - Effect: 'Allow'
       Action:
@@ -32,6 +35,9 @@ custom:
   FamilyServiceUrl:
     dev: https://familyservice-dev.familycarousel.com
     prod: https://familyservice.familycarousel.com
+  FamilyServiceAudience:
+    dev: familyservice-dev.familycarousel.com
+    prod: familyservice.familycarousel.com
   webpack:
     webpackConfig: 'webpack.config.js'
     includeModules: true

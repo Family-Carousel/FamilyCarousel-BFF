@@ -14,7 +14,7 @@ module.exports = {
     },
   },
   Mutation: {
-    createFamily: async (_, { input }, { dataSources }) => {
+    createFamily: async (_, { input }, { dataSources, res, req }) => {
       return await dataSources.familyAPI.createFamily(input);
     },
     updateFamily: async (_, { Id, input }, { dataSources }) => {
