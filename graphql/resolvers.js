@@ -14,10 +14,6 @@ module.exports = {
     },
   },
   Mutation: {
-    createUser: async (_, { input }, { dataSources }) => {
-      return null;
-      // return await dataSources.auth0API.SignUpUser(input);
-    },
     createFamily: async (_, { input }, { dataSources }) => {
       return await dataSources.familyAPI.createFamily(input);
     },
