@@ -40,11 +40,11 @@ const typeDefs = gql`
   }
 
   input FamilyInput {
-    Id: String
+    Id: ID
     Name: String!
     UserId: String!
     FamilyOwner: ID!
-    Description: String
+    Description: String!
     Size: Int!
     IsActive: Boolean
   }
