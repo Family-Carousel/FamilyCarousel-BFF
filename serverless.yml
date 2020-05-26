@@ -1,4 +1,5 @@
-org: 
+app: familycarousel-bff
+org: funkel1989
 
 service: familycarousel-bff
 
@@ -31,10 +32,10 @@ provider:
 
 custom:
   FamilyServiceUrl:
-    dev: https://familyservice-dev.familycarousel.com
+    test: https://familyservice-test.familycarousel.com
     prod: https://familyservice.familycarousel.com
   FamilyServiceAudience:
-    dev: familyservice-dev.familycarousel.com
+    test: familyservice-test.familycarousel.com
     prod: familyservice.familycarousel.com
   webpack:
     webpackConfig: 'webpack.config.js'
@@ -43,10 +44,10 @@ custom:
   serverless-offline:
     host: 0.0.0.0
   FamilyCarouselDomainMap:
-    dev: bff-dev.familycarousel.com
+    test: bff-test.familycarousel.com
     prod: bff.familycarousel.com
   FamilyCarouselCertMap:
-    dev: '*.familycarousel.com'
+    test: '*.familycarousel.com'
     prod: '*.familycarousel.com'
   customDomain:
     domainName: ${self:custom.FamilyCarouselDomainMap.${self:provider.stage}}
@@ -74,7 +75,7 @@ functions:
     events:
       - httpApi:
           path: /graphql
-          method: post
+          method: POST
       - httpApi:
           path: /graphql
-          method: get
+          method: GET
