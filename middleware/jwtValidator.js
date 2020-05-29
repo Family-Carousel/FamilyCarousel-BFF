@@ -27,7 +27,6 @@ module.exports = {
 
       const decodedToken = jwt.decode(tokenValue, { complete: true });
 
-
       const key = await client.getSigningKeyAsync(decodedToken.header.kid);
 
       const publicKey = key.getPublicKey();

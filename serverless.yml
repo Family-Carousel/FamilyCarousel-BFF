@@ -35,8 +35,8 @@ custom:
     test: https://familyservice-test.familycarousel.com
     prod: https://familyservice.familycarousel.com
   FamilyServiceAudience:
-    test: familyservice-test.familycarousel.com
-    prod: familyservice.familycarousel.com
+    test: https://familyservice-test.familycarousel.com
+    prod: https://familyservice.familycarousel.com
   webpack:
     webpackConfig: 'webpack.config.js'
     includeModules: true
