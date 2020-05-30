@@ -4,8 +4,8 @@
   "description": "Backend API for the front end UI running graphQL",
   "main": "handlers/handler.js",
   "scripts": {
-    "test": "yarn jest",
-    "test:coverage": "yarn jest --coverage",
+    "test": "yarn jest --passWithNoTests",
+    "test:coverage": "yarn jest --coverage --passWithNoTests",
     "start": "yarn serverless offline --noTimeout",
     "debug": "export SLS_DEBUG=* && node --inspect ./node_modules/.bin/serverless offline",
     "deploy:test": "serverless deploy -s test",
