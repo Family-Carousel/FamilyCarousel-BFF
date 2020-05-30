@@ -41,6 +41,7 @@ const typeDefs = gql`
     FamilyOwner: String!
     Description: String
     Members: [Member]
+    CalendarItems: [CalendarItem]
     Size: Int!
     IsActive: String!
     CreateBy: String!
