@@ -10,6 +10,7 @@ const typeDefs = gql`
     DateOfBirth: String!
     ManagedUser: Boolean!
     EmailAddress: String!
+    Color: String!
     Age: Int!
     CreateBy: String!
     CreateDateTime: String!
@@ -55,6 +56,7 @@ const typeDefs = gql`
     FamilyId: ID!
     FirstName: String!
     LastName: String
+    Color: String!
     DateOfBirth: String!
     ManagedUser: Boolean!
     EmailAddress: String!
