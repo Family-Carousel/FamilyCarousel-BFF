@@ -1,6 +1,22 @@
 const { gql } = require('apollo-server-lambda');
 
 const typeDefs = gql`
+
+  "Calendar Item"
+  type CalendarItem {
+    Id: ID!
+    FamilyId: ID!
+    Name: String!
+    Details: String
+    Start: String!
+    End: String!
+    Color: String!
+    CreateBy: String!
+    CreateDateTime: String!
+    LastUpdateBy: String!
+    LastUpdateDateTime: String!
+  }
+
   "Family Member"
   type Member {
     Id: ID!
@@ -38,6 +54,7 @@ const typeDefs = gql`
     getMemberById("Custom String" Id: ID!): Member
     listAllMembersForFamily("Custom String" FamilyId: ID!): [Member]
     listAllFamiliesForMember("Custom String" Id: ID!): [Family]
+    listAllCalendarItemsForFamily("Custom String", FamilyId: ID!): [CalendarItem]
   }
 
   input FamilyInput {
@@ -62,6 +79,17 @@ const typeDefs = gql`
     EmailAddress: String!
   }
 
+  input CalendarItemInput {
+    Id: ID
+    FamilyId: ID
+    UserId: ID!
+    Name: String!
+    Details: String
+    Start: String!
+    End: String!
+    Color: String!
+  }
+
   type Mutation {
     createFamily(input: FamilyInput!): Family
     updateFamily(Id: ID!, input: FamilyInput!): Family
@@ -71,6 +99,9 @@ const typeDefs = gql`
     updateMemberGlobally(Id: ID!, input: MemberInput!): Member
     deleteMemberFromFamily(Id: ID!, FamilyId: ID!): String
     deleteMember(Id: ID!): String
+    createCalendarEvent(input: CalendarItemInput!): CalendarItem
+    updateCalendarItemForFamily(Id: ID!, FamilyId: ID!, input: CalendarItemInput!): CalendarItem
+    deleteCalendarItemForFamily(Id: ID!, FamilyId: ID!): String
   }
 `;
 

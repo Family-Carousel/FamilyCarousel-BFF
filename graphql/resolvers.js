@@ -6,11 +6,17 @@ module.exports = {
     getMemberById: async (_, { Id }, { dataSources }) => {
       return await dataSources.familyAPI.getMemberById(Id);
     },
+    
     listAllMembersForFamily: async (_, { FamilyId }, { dataSources }) => {
       return await dataSources.familyAPI.listAllMembersForFamily(FamilyId);
     },
     listAllFamiliesForMember: async (_, { Id }, { dataSources }) => {
       return await dataSources.familyAPI.listAllFamiliesForMember(Id);
+    },
+    listAllCalendarItemsForFamily: async (_, { FamilyId }, { dataSources }) => {
+      return await dataSources.familyAPI.listAllCalendarItemsForFamily(
+        FamilyId
+      );
     },
   },
   Mutation: {
@@ -23,6 +29,7 @@ module.exports = {
     deleteFamily: async (_, { Id }, { dataSources }) => {
       return await dataSources.familyAPI.deleteFamily(Id);
     },
+
     createMember: async (_, { input }, { dataSources }) => {
       return await dataSources.familyAPI.createMember(input);
     },
@@ -45,6 +52,31 @@ module.exports = {
     },
     deleteMember: async (_, { Id }, { dataSources }) => {
       return await dataSources.familyAPI.deleteMember(Id);
+    },
+
+    createCalendarEvent: async (_, { input }, { dataSources }) => {
+      return await dataSources.familyAPI.createCalendarEvent(input);
+    },
+    updateCalendarItemForFamily: async (
+      _,
+      { Id, FamilyId, input },
+      { dataSources }
+    ) => {
+      return await dataSources.familyAPI.updateCalendarItemForFamily(
+        Id,
+        FamilyId,
+        input
+      );
+    },
+    deleteCalendarItemForFamily: async (
+      _,
+      { Id, FamilyId },
+      { dataSources }
+    ) => {
+      return await dataSources.familyAPI.deleteCalendarItemFromFamily(
+        Id,
+        FamilyId
+      );
     },
   },
 };

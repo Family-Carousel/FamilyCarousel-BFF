@@ -57,6 +57,17 @@ module.exports = class familyAPI extends RESTDataSource {
     }
   }
 
+  async listAllCalendarItemsForFamily(familyId) {
+    try {
+      return JSON.parse(await this.get(`family/${familyId}/calendar`));
+    } catch (err) {
+      console.error('BFF - Failed to get list of calendar items for family: ', err);
+      throw new Error(
+        'BFF - Failed to get list of calendar items for family' + err.message
+      );
+    }
+  }
+
   // MUTATIONS
 
   async createFamily(familyData) {
@@ -133,6 +144,36 @@ module.exports = class familyAPI extends RESTDataSource {
       throw new Error(
         'BFF - Failed to delete member in all families' + err.message
       );
+    }
+  }
+
+  async createCalendarItem(calendarData) {
+    try {
+      return JSON.parse(await this.post('calendar', JSON.stringify(calendarData)));
+    } catch (err) {
+      console.error('BFF - Failed to create Calendar Item: ', err);
+      throw new Error('BFF - Failed to create Calendar Item' + err.message);
+    }
+  }
+
+  async updateCalendarItemForFamily(id, familyId, calendarData) {
+    try {
+      return JSON.parse(await this.put(
+        `calendar/${id}/family/${familyId}`,
+        JSON.stringify(calendarData)
+      ));
+    } catch (err) {
+      console.error('BFF - Failed to update calendar item for family :', err);
+      throw new Error('BFF - Failed to update calendar item for family' + err.message);
+    }
+  }
+
+  async deleteCalendarItemFromFamily(id, familyId) {
+    try {
+      return JSON.parse(await this.delete(`calendar/${id}/family/${familyId}`));
+    } catch (err) {
+      console.error('BFF - Failed to delete member in family :', err);
+      throw new Error('BFF - Failed to delete member in family' + err.message);
     }
   }
 };
