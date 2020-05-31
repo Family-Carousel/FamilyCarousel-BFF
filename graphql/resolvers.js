@@ -55,7 +55,7 @@ module.exports = {
     },
 
     createCalendarEvent: async (_, { input }, { dataSources }) => {
-      return await dataSources.familyAPI.createCalendarEvent(input);
+      return await dataSources.familyAPI.createCalendarItem(input);
     },
     updateCalendarItemForFamily: async (
       _,
