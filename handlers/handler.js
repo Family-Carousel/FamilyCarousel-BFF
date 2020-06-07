@@ -60,9 +60,9 @@ const schema = applyMiddleware(
   makeExecutableSchema({
     typeDefs,
     resolvers,
-  }),
-  logger,
-  permissions,
+  },
+  logger),
+  permissions
 );
 
 const dataSourcesMethod = () => ({
