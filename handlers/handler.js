@@ -61,17 +61,17 @@ const schema = applyMiddleware(
     typeDefs,
     resolvers,
   }),
+  logger,
   permissions,
-  logger
 );
+
+const dataSourcesMethod = () => ({
+  familyAPI: new familyAPI()
+});
 
 let apolloSettings = {
   schema,
-  dataSources: () => {
-    return {
-      familyAPI: new familyAPI()
-    };
-  },
+  dataSources: dataSourcesMethod,
   validationRules: [depthLimit(6)],
   context: contextMethod,
   cors: {
