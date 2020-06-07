@@ -19,19 +19,7 @@ const isAuthenticated = rule()(async (parent, args, context, info) => {
   }
 });
 
-const logger = { log: e => console.error(e) }
-
-const loggingMiddleware = async (resolve, root, args, context, info) => {
-  // Uncomment the console.log's below to troubleshoot graphql issues
-
-  // console.log(`Input arguments: ${JSON.stringify(args)}`);
-
-  const result = await resolve(root, args, context, info);
-
-  // console.log(`Result: ${JSON.stringify(result)}`);
-
-  return result;
-};
+const logger = { log: e => console.error(e) };
 
 const permissions = shield(
   {
@@ -74,7 +62,6 @@ const schema = applyMiddleware(
     resolvers,
   }),
   permissions,
-  loggingMiddleware,
   logger
 );
 
