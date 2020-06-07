@@ -19,6 +19,8 @@ const isAuthenticated = rule()(async (parent, args, context, info) => {
   }
 });
 
+const logger = { log: e => console.error(e) }
+
 const loggingMiddleware = async (resolve, root, args, context, info) => {
   // Uncomment the console.log's below to troubleshoot graphql issues
 
@@ -38,6 +40,7 @@ const permissions = shield(
       getMemberById: isAuthenticated,
       listAllMembersForFamily: isAuthenticated,
       listAllFamiliesForMember: isAuthenticated,
+      listAllCalendarItemsForFamily: isAuthenticated,
     },
     Mutation: {
       createFamily: isAuthenticated,
@@ -48,6 +51,9 @@ const permissions = shield(
       updateMemberGlobally: isAuthenticated,
       deleteMemberFromFamily: isAuthenticated,
       deleteMember: isAuthenticated,
+      createCalendarEvent: isAuthenticated,
+      updateCalendarItemForFamily: isAuthenticated,
+      deleteCalendarItemForFamily: isAuthenticated,
     },
   },
   {
@@ -68,7 +74,8 @@ const schema = applyMiddleware(
     resolvers,
   }),
   permissions,
-  loggingMiddleware
+  loggingMiddleware,
+  logger
 );
 
 let apolloSettings = {
