@@ -43,6 +43,7 @@ const typeDefs = gql`
     Members: [Member]
     CalendarItems: [CalendarItem]
     Size: Int!
+    Color: String!
     IsActive: String!
     CreateBy: String!
     CreateDateTime: String!
@@ -64,6 +65,7 @@ const typeDefs = gql`
     UserId: String!
     FamilyOwner: ID!
     Description: String!
+    Color: String!
     Size: Int!
     IsActive: Boolean
   }
