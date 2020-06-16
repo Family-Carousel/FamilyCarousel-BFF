@@ -2,6 +2,21 @@ const { gql } = require('apollo-server-lambda');
 
 const typeDefs = gql`
 
+  "Rule"
+  type Rule {
+    Id: ID!
+    FamilyId: ID!
+    Name: String!
+    Details: String
+    AppliesToUsers: [String]!
+    FamilyRule: Boolean!
+    Color: String!
+    CreateBy: String!
+    CreateDateTime: String!
+    LastUpdateBy: String!
+    LastUpdateDateTime: String!
+  }
+
   "Calendar Item"
   type CalendarItem {
     Id: ID!
@@ -57,6 +72,7 @@ const typeDefs = gql`
     listAllMembersForFamily("Custom String" FamilyId: ID!): [Member]
     listAllFamiliesForMember("Custom String" Id: ID!): [Family]
     listAllCalendarItemsForFamily("Custom String", FamilyId: ID!): [CalendarItem]
+    listAllRulesForFamily("Custom String", FamilyId: ID!): [Rule]
   }
 
   input FamilyInput {
@@ -93,6 +109,17 @@ const typeDefs = gql`
     Color: String!
   }
 
+  input RuleInput {
+    Id: ID
+    FamilyId: ID
+    UserId: ID!
+    Name: String!
+    Details: String
+    FamilyRule: Boolean!
+    AppliesToUsers: [String]!
+    Color: String!
+  }
+
   type Mutation {
     createFamily(input: FamilyInput!): Family
     updateFamily(Id: ID!, input: FamilyInput!): Family
@@ -105,6 +132,9 @@ const typeDefs = gql`
     createCalendarEvent(input: CalendarItemInput!): CalendarItem
     updateCalendarItemForFamily(Id: ID!, FamilyId: ID!, input: CalendarItemInput!): CalendarItem
     deleteCalendarItemForFamily(Id: ID!, FamilyId: ID!): String
+    createRule(input: RuleInput!): RuleInput
+    updateRuleForFamily(Id: ID!, FamilyId: ID!, input: RuleInput!): RuleInput
+    deleteRuleForFamily(Id: ID!, FamilyId: ID!): String
   }
 `;
 

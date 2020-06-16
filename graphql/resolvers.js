@@ -18,6 +18,11 @@ module.exports = {
         FamilyId
       );
     },
+    listAllRulesForFamily: async (_, { FamilyId }, { dataSources }) => {
+      return await dataSources.familyAPI.listAllRulesForFamily(
+        FamilyId
+      );
+    },
   },
   Mutation: {
     createFamily: async (_, { input }, { dataSources }) => {
@@ -74,6 +79,31 @@ module.exports = {
       { dataSources }
     ) => {
       return await dataSources.familyAPI.deleteCalendarItemFromFamily(
+        Id,
+        FamilyId
+      );
+    },
+
+    createRule: async (_, { input }, { dataSources }) => {
+      return await dataSources.familyAPI.createRule(input);
+    },
+    updateRuleForFamily: async (
+      _,
+      { Id, FamilyId, input },
+      { dataSources }
+    ) => {
+      return await dataSources.familyAPI.updateRuleForFamily(
+        Id,
+        FamilyId,
+        input
+      );
+    },
+    deleteRuleForFamily: async (
+      _,
+      { Id, FamilyId },
+      { dataSources }
+    ) => {
+      return await dataSources.familyAPI.deleteRuleFromFamily(
         Id,
         FamilyId
       );
