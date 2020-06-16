@@ -8,7 +8,7 @@ const typeDefs = gql`
     FamilyId: ID!
     Name: String!
     Details: String
-    AppliesToUsers: [String]!
+    AppliesToUsers: [String]
     FamilyRule: Boolean!
     Color: String!
     CreateBy: String!
@@ -116,7 +116,7 @@ const typeDefs = gql`
     Name: String!
     Details: String
     FamilyRule: Boolean!
-    AppliesToUsers: [String]!
+    AppliesToUsers: [String]
     Color: String!
   }
 
@@ -132,8 +132,8 @@ const typeDefs = gql`
     createCalendarEvent(input: CalendarItemInput!): CalendarItem
     updateCalendarItemForFamily(Id: ID!, FamilyId: ID!, input: CalendarItemInput!): CalendarItem
     deleteCalendarItemForFamily(Id: ID!, FamilyId: ID!): String
-    createRule(input: RuleInput!): RuleInput
-    updateRuleForFamily(Id: ID!, FamilyId: ID!, input: RuleInput!): RuleInput
+    createRule(input: RuleInput!): Rule
+    updateRuleForFamily(Id: ID!, FamilyId: ID!, input: RuleInput!): Rule
     deleteRuleForFamily(Id: ID!, FamilyId: ID!): String
   }
 `;
