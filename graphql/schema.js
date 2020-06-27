@@ -84,6 +84,7 @@ const typeDefs = gql`
     Color: String!
     Size: Int!
     IsActive: Boolean
+    UsesRule: Boolean!
   }
 
   input MemberInput {
