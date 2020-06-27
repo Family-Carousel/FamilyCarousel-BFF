@@ -57,6 +57,7 @@ const typeDefs = gql`
     Description: String
     Members: [Member]
     CalendarItems: [CalendarItem]
+    Rules: [Rule]
     UsesRules: Boolean!
     Size: Int!
     Color: String!
